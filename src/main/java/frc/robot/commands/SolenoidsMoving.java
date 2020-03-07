@@ -7,16 +7,17 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SolenoidsMoving extends CommandBase {
   
-  Solenoid solenoid1, solenoid2;
+  DoubleSolenoid solenoid;
 
   public SolenoidsMoving() {
-    solenoid1 = new Solenoid(0);
-    solenoid2 = new Solenoid(1);
+    solenoid = new DoubleSolenoid(0, 1);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -28,15 +29,15 @@ public class SolenoidsMoving extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    solenoid1.set(true);
-    solenoid2.set(true);
+    solenoid.set(Value.kForward);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    solenoid1.set(false);
-    solenoid2.set(false);
+    solenoid.set(Value.kReverse);
+    Timer.delay(0.25);
+    solenoid.set(Value.kOff);
   }
 
   // Returns true when the command should end.

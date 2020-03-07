@@ -9,22 +9,23 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
   
   WPI_TalonSRX shooter1, shooter2, shooterRight, shooterLeft;
-  Solenoid lift1, lift2;
+  DoubleSolenoid lift;
 
   public Shooter() {
     shooter1 = new WPI_TalonSRX(Constants.portShooter1);
     shooter2 = new WPI_TalonSRX(Constants.portShooter2);
     shooterRight = new WPI_TalonSRX(Constants.portShooterRight);
     shooterLeft = new WPI_TalonSRX(Constants.portShooterLeft);
-    lift1 = new Solenoid(Constants.portSolenoid1);
-    lift2 = new Solenoid(Constants.portSolenoid2);
+    lift = new DoubleSolenoid(0, 1);
   }
 
   public void setIntake(double speed){
@@ -32,19 +33,14 @@ public class Shooter extends SubsystemBase {
     shooter2.set(speed);
   }
 
-  public void setLift(boolean state){
-    lift1.set(state);
-    lift2.set(state);
-  }
-
   public void liftShooter(){
-    lift1.set(true);
-    lift2.set(true);
+    lift.set(Value.kForward);
   }
 
   public void dropShooter(){
-    lift1.set(false);
-    lift2.set(false);
+    lift.set(Value.kReverse);
+    Timer.delay(0.25);
+    lift.set(Value.kOff);
   }
 
   public void setFlywheel(double speed){
@@ -57,6 +53,7 @@ public class Shooter extends SubsystemBase {
     shooterLeft.stopMotor();
     shooter1.stopMotor();
     shooter2.stopMotor();
+    lift.set(Value.kOff);
   }
 
   public void stopIntake(){

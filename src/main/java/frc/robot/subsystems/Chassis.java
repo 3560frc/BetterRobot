@@ -24,14 +24,22 @@ public class Chassis extends SubsystemBase {
     rightFront = new WPI_VictorSPX(Constants.portRightFront);
   }
 
+  public void setLeft(double speed){
+    leftBack.set(-1 * speed);
+    leftFront.set(-1 * speed);
+  }
+
+  public void setRight(double speed){
+    rightFront.set(speed);
+    rightBack.set(speed);
+  }
+
   /**
    * @param speed The speed that the motors should move at
    */
   public void driveBoth(double speed, double time){
-    rightBack.set(-1 * speed);
-    leftBack.set(-1 * speed);
-    rightFront.set(speed);
-    leftFront.set(speed);
+    setRight(speed);
+    setLeft(speed);
     Timer.delay(time);
   }
 
@@ -39,8 +47,7 @@ public class Chassis extends SubsystemBase {
    * @param speed The speed that the motors should move at
    */
   public void driveRight(double speed, double time){
-    rightBack.set(-1 * speed);
-    rightFront.set(speed);
+    setRight(speed);
     Timer.delay(time);
   }
 
@@ -48,16 +55,13 @@ public class Chassis extends SubsystemBase {
    * @param speed The speed that the motors should move at
    */
   public void driveLeft(double speed, double time){
-    leftBack.set(-1 * speed);
-    leftFront.set(speed);
+    setLeft(speed);
     Timer.delay(time);
   }
 
   public void drive(double lSpeed, double rSpeed){
-    leftBack.set(-1*lSpeed);
-    leftFront.set(-1*lSpeed);
-    rightBack.set(rSpeed);
-    rightFront.set(rSpeed);
+    setLeft(lSpeed);
+    setRight(rSpeed);
   }
 
   /**
