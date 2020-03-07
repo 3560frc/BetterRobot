@@ -16,6 +16,8 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeStuff;
 import frc.robot.commands.ManualShoot;
 import frc.robot.commands.ShootBall;
+import frc.robot.commands.SolenoidsMoving;
+import frc.robot.commands.StopAll;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -42,6 +44,9 @@ public class RobotContainer {
   private final IntakeStuff intakeStuff = new IntakeStuff(intake);
   private final ManualShoot manualShoot = new ManualShoot(shooter);
   private final ColourWheel colourWheel = new ColourWheel(shooter);
+  private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving();
+  private final StopAll stopAll = new StopAll(shooter, intake, chassis);
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -64,6 +69,8 @@ public class RobotContainer {
     new JoystickButton(controller, Button.kBumperLeft.value).whileHeld(intakeStuff);
     new JoystickButton(controller, Button.kBumperRight.value).whileHeld(manualShoot);
     new JoystickButton(controller, Button.kX.value).whileHeld(colourWheel);
+    new JoystickButton(controller, Button.kB.value).whileHeld(solenoidsMoving);
+    new JoystickButton(controller, Button.kBack.value).toggleWhenPressed(stopAll);
   }
 
   /**

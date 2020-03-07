@@ -7,17 +7,22 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.*;
 
-public class SolenoidsMoving extends CommandBase {
+public class StopAll extends CommandBase {
   
-  Solenoid solenoid1, solenoid2;
+  private final Shooter shooter;
+  private final Intake intake;
+  private final Chassis chassis;
 
-  public SolenoidsMoving() {
-    solenoid1 = new Solenoid(0);
-    solenoid2 = new Solenoid(1);
-    // Use addRequirements() here to declare subsystem dependencies.
+  public StopAll(Shooter s, Intake i, Chassis c) {
+    shooter = s;
+    intake = i;
+    chassis = c;
+    addRequirements(shooter);
+    addRequirements(intake);
+    addRequirements(chassis);
   }
 
   // Called when the command is initially scheduled.
@@ -28,15 +33,14 @@ public class SolenoidsMoving extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    solenoid1.set(true);
-    solenoid2.set(true);
+    intake.stop();
+    chassis.stop();
+    shooter.stop();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    solenoid1.set(false);
-    solenoid2.set(false);
   }
 
   // Returns true when the command should end.
