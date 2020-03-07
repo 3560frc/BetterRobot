@@ -28,7 +28,7 @@ public class ColourWheel extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setIntake(0.15);
+    shooter.setFlywheel(0.15);
   }
 
   // Called once the command ends or is interrupted.
