@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -19,6 +20,7 @@ import frc.robot.commands.ManualShoot;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.StopAll;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -44,8 +46,9 @@ public class RobotContainer {
   private final ManualShoot manualShoot = new ManualShoot(shooter);
   private final ColourWheel colourWheel = new ColourWheel(shooter);
   private final AutonCommand autonCommand = new AutonCommand(shooter, chassis, shootBall);
-  //private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving();
+  private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving(shooter);
   private final StopAll stopAll = new StopAll(shooter, intake, chassis);
+  private final UsbCamera camera = new UsbCamera("GreenVision", 0);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -56,6 +59,7 @@ public class RobotContainer {
     chassis.setDefaultCommand(
       new TankDrive(chassis, controller)
     );
+    System.out.println(camera.isEnabled());
   }
 
   /**
@@ -66,11 +70,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(controller, Button.kA.value).toggleWhenPressed(shootBall);
-    new JoystickButton(controller, Button.kBumperLeft.value).whileHeld(intakeStuff);
-    new JoystickButton(controller, Button.kY.value).whileHeld(outTake);
-    new JoystickButton(controller, Button.kBumperRight.value).whileHeld(manualShoot);
+    new JoystickButton(controller, Button.kBumperLeft.value).toggleWhenPressed(intakeStuff);
+    new JoystickButton(controller, Button.kY.value).toggleWhenPressed(outTake);
+    new JoystickButton(controller, Button.kBumperRight.value).toggleWhenPressed(manualShoot);
     new JoystickButton(controller, Button.kX.value).whileHeld(colourWheel);
-    //new JoystickButton(controller, Button.kB.value).toggleWhenPressed(solenoidsMoving);
+    new JoystickButton(controller, Button.kB.value).toggleWhenPressed(solenoidsMoving);
     new JoystickButton(controller, Button.kBack.value).toggleWhenPressed(stopAll);
   }
 

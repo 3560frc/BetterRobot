@@ -28,13 +28,13 @@ public class AutonCommand extends CommandBase {
   @Override
   public void initialize() {
     shooter.liftShooter();
-    chassis.driveBoth(0.5, 3);
+    chassis.driveBoth(-0.5, 0.5);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootBall.execute();
+    //shootBall.execute();
   }
 
   // Called once the command ends or is interrupted.

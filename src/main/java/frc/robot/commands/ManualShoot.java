@@ -22,19 +22,20 @@ public class ManualShoot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.liftShooter();
+    //shooter.liftShooter();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    shooter.setIntake(0.7);
     shooter.setFlywheel(0.7);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.dropShooter();
+    //shooter.dropShooter();
     shooter.stop();
   }
 

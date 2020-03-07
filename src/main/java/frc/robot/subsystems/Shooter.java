@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
-import edu.wpi.first.wpilibj.Compressor;
+//import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -20,21 +20,21 @@ public class Shooter extends SubsystemBase {
   
   WPI_TalonSRX shooter1, shooter2, shooterRight, shooterLeft;
   DoubleSolenoid lift;
-  Compressor compressor;
+  //Compressor compressor;
 
   public Shooter() {
     shooter1 = new WPI_TalonSRX(Constants.portShooter1);
     shooter2 = new WPI_TalonSRX(Constants.portShooter2);
     shooterRight = new WPI_TalonSRX(Constants.portShooterRight);
     shooterLeft = new WPI_TalonSRX(Constants.portShooterLeft);
-    compressor = new Compressor();
-    compressor.start();
+    //compressor = new Compressor();
+    //compressor.start();
     lift = new DoubleSolenoid(0, 1);
   }
 
   public void setIntake(double speed){
     shooter1.set(speed);
-    shooter2.set(speed);
+    shooter2.set(-speed);
   }
 
   public void liftShooter(){
@@ -48,7 +48,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void setFlywheel(double speed){
-    shooterRight.set(speed);
+    shooterRight.set(-speed);
     shooterLeft.set(-speed);
   }
 
@@ -72,6 +72,6 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    compressor.start();
+    //compressor.start();
   }
 }

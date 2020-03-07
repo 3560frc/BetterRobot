@@ -31,7 +31,7 @@ public class TankDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    chassis.drive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
+    chassis.drive(controller.getY(Hand.kLeft)*0.7, controller.getY(Hand.kRight)*0.7);
   }
 
   // Called once the command ends or is interrupted.
