@@ -9,37 +9,42 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
-                                                                                                                                                                                                                
-public class AutonCommand extends CommandBase {
-  
-  private final Shooter shooter;
-  private final Chassis chassis;
-  private final ShootBall shootBall;
 
-  public AutonCommand(Shooter s, Chassis c, ShootBall sb) {
+public class OutTake extends CommandBase {
+  
+  private final Intake intake;
+  private final Shooter shooter;
+  boolean b = false;
+
+  public OutTake(Shooter s, Intake i) {
+    intake = i;
     shooter = s;
-    chassis = c;
-    shootBall = sb;
+    addRequirements(intake);
     addRequirements(shooter);
-    addRequirements(chassis);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.liftShooter();
-    chassis.driveBoth(0.5, 3);
+    swatch();
+  }
+
+  public void swatch(){
+    b = !b;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shootBall.execute();
+    intake.setIntake(-0.5);
+    shooter.setIntake(-0.7);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake.stop();
+    shooter.stopIntake();
   }
 
   // Returns true when the command should end.
