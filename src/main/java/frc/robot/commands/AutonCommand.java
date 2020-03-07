@@ -28,6 +28,7 @@ public class AutonCommand extends CommandBase {
   @Override
   public void initialize() {
     shooter.liftShooter();
+    chassis.driveBoth(0.5, 3);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
