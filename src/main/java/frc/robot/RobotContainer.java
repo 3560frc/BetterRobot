@@ -45,7 +45,7 @@ public class RobotContainer {
   private final OutTake outTake = new OutTake(shooter, intake);
   private final ManualShoot manualShoot = new ManualShoot(shooter);
   private final ColourWheel colourWheel = new ColourWheel(shooter);
-  private final AutonCommand autonCommand = new AutonCommand(shooter, chassis, shootBall);
+  private final AutonCommand autonCommand = new AutonCommand(shooter, chassis);
   private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving(shooter);
   private final StopAll stopAll = new StopAll(shooter, intake, chassis);
   private final UsbCamera camera = new UsbCamera("GreenVision", 0);

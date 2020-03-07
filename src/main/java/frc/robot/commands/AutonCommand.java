@@ -14,12 +14,12 @@ public class AutonCommand extends CommandBase {
   
   private final Shooter shooter;
   private final Chassis chassis;
-  private final ShootBall shootBall;
+  //private final ShootBall shootBall;
 
-  public AutonCommand(Shooter s, Chassis c, ShootBall sb) {
+  public AutonCommand(Shooter s, Chassis c) {
     shooter = s;
     chassis = c;
-    shootBall = sb;
+    //shootBall = sb;
     addRequirements(shooter);
     addRequirements(chassis);
   }
