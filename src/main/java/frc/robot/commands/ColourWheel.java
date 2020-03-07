@@ -8,13 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.Shooter;
 
-public class ManualShoot extends CommandBase {
+public class ColourWheel extends CommandBase {
   
   private final Shooter shooter;
 
-  public ManualShoot(Shooter s){
+  public ColourWheel(Shooter s) {
     shooter = s;
     addRequirements(shooter);
   }
@@ -28,13 +28,13 @@ public class ManualShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setIntake(0.7);
-    shooter.setFlywheel(0.7);
+    shooter.setIntake(0.15);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooter.stop();
   }
 
   // Returns true when the command should end.

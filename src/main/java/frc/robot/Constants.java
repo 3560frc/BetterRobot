@@ -20,10 +20,10 @@ public final class Constants {
     public static int portLeftFront = 9;
     public static int portLeftBack = 2;
     public static int portRightFront = 1;
-    public static int portShooter1 = 4;
-    public static int portShooter2 = 7;
-    public static int portShooterRight = 5;
-    public static int portShooterLeft = 6;
+    public static int portShooter1 = 5;
+    public static int portShooter2 = 6;
+    public static int portShooterRight = 4;
+    public static int portShooterLeft = 7;
     public static int portIntake = 3;
     public static int portXbox = 0;
     public static int portSolenoid1 = 0;

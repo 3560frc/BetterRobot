@@ -11,6 +11,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.commands.ColourWheel;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeStuff;
 import frc.robot.commands.ManualShoot;
@@ -40,6 +41,7 @@ public class RobotContainer {
   private final ShootBall shootBall = new ShootBall(shooter, chassis, NetworkTableInstance.getDefault().getTable("greenVision"));
   private final IntakeStuff intakeStuff = new IntakeStuff(intake);
   private final ManualShoot manualShoot = new ManualShoot(shooter);
+  private final ColourWheel colourWheel = new ColourWheel(shooter);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -61,7 +63,7 @@ public class RobotContainer {
     new JoystickButton(controller, Button.kA.value).toggleWhenPressed(shootBall);
     new JoystickButton(controller, Button.kBumperLeft.value).whileHeld(intakeStuff);
     new JoystickButton(controller, Button.kBumperRight.value).whileHeld(manualShoot);
-    //new JoystickButton(controller, Button.kX.value).whenPressed(solenoidsMoving);
+    new JoystickButton(controller, Button.kX.value).whileHeld(colourWheel);
   }
 
   /**
