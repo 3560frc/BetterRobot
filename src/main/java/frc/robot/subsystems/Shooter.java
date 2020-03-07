@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -19,12 +20,15 @@ public class Shooter extends SubsystemBase {
   
   WPI_TalonSRX shooter1, shooter2, shooterRight, shooterLeft;
   DoubleSolenoid lift;
+  Compressor compressor;
 
   public Shooter() {
     shooter1 = new WPI_TalonSRX(Constants.portShooter1);
     shooter2 = new WPI_TalonSRX(Constants.portShooter2);
     shooterRight = new WPI_TalonSRX(Constants.portShooterRight);
     shooterLeft = new WPI_TalonSRX(Constants.portShooterLeft);
+    compressor = new Compressor();
+    compressor.start();
     lift = new DoubleSolenoid(0, 1);
   }
 
@@ -68,6 +72,6 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    compressor.start();
   }
 }

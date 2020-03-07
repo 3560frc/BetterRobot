@@ -11,17 +11,15 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.commands.AutonCommand;
 import frc.robot.commands.ColourWheel;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeStuff;
 import frc.robot.commands.OutTake;
 import frc.robot.commands.ManualShoot;
 import frc.robot.commands.ShootBall;
-import frc.robot.commands.SolenoidsMoving;
 import frc.robot.commands.StopAll;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -33,9 +31,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final Chassis chassis = new Chassis();
   private final Intake intake = new Intake();
@@ -46,7 +43,8 @@ public class RobotContainer {
   private final OutTake outTake = new OutTake(shooter, intake);
   private final ManualShoot manualShoot = new ManualShoot(shooter);
   private final ColourWheel colourWheel = new ColourWheel(shooter);
-  private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving();
+  private final AutonCommand autonCommand = new AutonCommand(shooter, chassis, shootBall);
+  //private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving();
   private final StopAll stopAll = new StopAll(shooter, intake, chassis);
 
   /**
@@ -72,7 +70,7 @@ public class RobotContainer {
     new JoystickButton(controller, Button.kY.value).whileHeld(outTake);
     new JoystickButton(controller, Button.kBumperRight.value).whileHeld(manualShoot);
     new JoystickButton(controller, Button.kX.value).whileHeld(colourWheel);
-    new JoystickButton(controller, Button.kB.value).toggleWhenPressed(solenoidsMoving);
+    //new JoystickButton(controller, Button.kB.value).toggleWhenPressed(solenoidsMoving);
     new JoystickButton(controller, Button.kBack.value).toggleWhenPressed(stopAll);
   }
 
@@ -83,6 +81,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return autonCommand;
   }
 }
