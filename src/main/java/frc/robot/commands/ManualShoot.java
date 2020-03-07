@@ -28,13 +28,14 @@ public class ManualShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setIntake(0.7);
     shooter.setFlywheel(0.7);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooter.dropShooter();
+    shooter.stop();
   }
 
   // Returns true when the command should end.

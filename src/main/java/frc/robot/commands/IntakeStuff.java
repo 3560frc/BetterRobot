@@ -13,12 +13,14 @@ import frc.robot.subsystems.*;
 public class IntakeStuff extends CommandBase {
   
   private final Intake intake;
+  private final Shooter shooter;
   boolean b = false;
 
-  public IntakeStuff(Intake i) {
+  public IntakeStuff(Shooter s, Intake i) {
     intake = i;
-    b = true;
+    shooter = s;
     addRequirements(intake);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -35,14 +37,15 @@ public class IntakeStuff extends CommandBase {
   @Override
   public void execute() {
     intake.setIntake(0.5);
+    shooter.setIntake(0.7);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     intake.stop();
+    shooter.stopIntake();
   }
-
 
   // Returns true when the command should end.
   @Override

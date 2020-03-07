@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
@@ -66,7 +67,10 @@ public class ShootBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shooter.setFlywheel(0.7);
+    Timer.delay(1.5);
     shooter.dropShooter();
+    shooter.stopFlywheel();
   }
 
   // Returns true when the command should end.

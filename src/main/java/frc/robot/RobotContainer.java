@@ -41,7 +41,7 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final XboxController controller = new XboxController(Constants.portXbox);
   private final ShootBall shootBall = new ShootBall(shooter, chassis, NetworkTableInstance.getDefault().getTable("greenVision"));
-  private final IntakeStuff intakeStuff = new IntakeStuff(intake);
+  private final IntakeStuff intakeStuff = new IntakeStuff(shooter, intake);
   private final ManualShoot manualShoot = new ManualShoot(shooter);
   private final ColourWheel colourWheel = new ColourWheel(shooter);
   private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving();

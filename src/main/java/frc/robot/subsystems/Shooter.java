@@ -59,6 +59,16 @@ public class Shooter extends SubsystemBase {
     shooter2.stopMotor();
   }
 
+  public void stopIntake(){
+    shooter1.stopMotor();
+    shooter2.stopMotor();
+  }
+
+  public void stopFlywheel(){
+    shooterRight.stopMotor();
+    shooterLeft.stopMotor();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
