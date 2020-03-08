@@ -7,8 +7,10 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -48,7 +50,7 @@ public class RobotContainer {
   private final AutonCommand autonCommand = new AutonCommand(shooter, chassis);
   private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving(shooter);
   private final StopAll stopAll = new StopAll(shooter, intake, chassis);
-  private final UsbCamera camera = new UsbCamera("GreenVision", 0);
+  private final UsbCamera camera = new UsbCamera("GreenVision", 1);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -60,6 +62,8 @@ public class RobotContainer {
       new TankDrive(chassis, controller)
     );
     System.out.println(camera.isEnabled());
+    CameraServer.getInstance().addCamera(camera);
+    CameraServer.getInstance().putVideo("Vision", 640, 480);
   }
 
   /**

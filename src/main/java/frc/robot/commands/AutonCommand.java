@@ -9,17 +9,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
-                                                                                                                                                                                                                
+import edu.wpi.first.wpilibj.Timer;
+
 public class AutonCommand extends CommandBase {
+  
   
   private final Shooter shooter;
   private final Chassis chassis;
-  //private final ShootBall shootBall;
 
   public AutonCommand(Shooter s, Chassis c) {
     shooter = s;
     chassis = c;
-    //shootBall = sb;
     addRequirements(shooter);
     addRequirements(chassis);
   }
@@ -27,8 +27,13 @@ public class AutonCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.liftShooter();
-    chassis.driveBoth(-0.5, 0.5);
+    chassis.driveBoth(-0.5, 0.8);
+    Timer.delay(3);
+    chassis.stop();
+    shooter.dropShooter();
+    shooter.setIntake(0.7);
+    shooter.setFlywheel(0.7);
+    Timer.delay(3);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
