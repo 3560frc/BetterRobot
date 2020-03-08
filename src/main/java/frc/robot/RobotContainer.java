@@ -62,8 +62,7 @@ public class RobotContainer {
       new TankDrive(chassis, controller)
     );
     System.out.println(camera.isEnabled());
-    CameraServer.getInstance().addCamera(camera);
-    CameraServer.getInstance().putVideo("Vision", 640, 480);
+    edu.wpi.first.cameraserver.CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
