@@ -29,6 +29,7 @@ public class AutonCommand extends CommandBase {
   public void initialize() {
     chassis.driveBoth(-0.5, 0.8);
     Timer.delay(3);
+    chassis.driveBoth(0.1, 0.5);
     chassis.stop();
     shooter.dropShooter();
     shooter.setIntake(0.7);
