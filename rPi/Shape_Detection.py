@@ -54,8 +54,8 @@ while True:
         if area > 400:
             cv2.drawContours(frame, [approx], 0, (0, 0, 0), 5)
 
-            if len(approx) == 8:
-                cv2.putText(frame, "Octagon", (x, y), font, 1, (0, 0, 0))
+            if len(approx) == 6:
+                cv2.putText(frame, "Hexagon", (x, y), font, 1, (0, 0, 0))
 
             elif 10 < len(approx) < 20:
                 cv2.putText(frame, "Circle", (x, y), font, 1, (0, 0, 0))

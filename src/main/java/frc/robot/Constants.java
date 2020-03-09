@@ -28,5 +28,6 @@ public final class Constants {
     public static int portXbox = 0;
     public static int portSolenoid1 = 0;
     public static int portSolenoid2 = 1;
+    public static int portPWMLift = 0;
     public static boolean intakeMode = false;
 }

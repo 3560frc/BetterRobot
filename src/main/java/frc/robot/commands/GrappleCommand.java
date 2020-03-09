@@ -7,37 +7,33 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.GrappleLift;
 
-public class TankDrive extends CommandBase {
+public class GrappleCommand extends CommandBase {
   
-  private final Chassis chassis;
-  private final XboxController controller;
+  GrappleLift lift;
 
-  public TankDrive(Chassis c, XboxController xbox) {
-    chassis = c;
-    controller = xbox;
-    addRequirements(chassis);
+  public GrappleCommand(GrappleLift g) {
+    lift = g;
+    addRequirements(lift);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    lift.pullLift();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    chassis.drive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
+    lift.pullLift();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    chassis.stop();
+    lift.stop();
   }
 
   // Returns true when the command should end.

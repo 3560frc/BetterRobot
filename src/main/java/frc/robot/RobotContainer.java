@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -16,7 +16,6 @@ import frc.robot.commands.ColourWheel;
 import frc.robot.commands.IntakeStuff;
 import frc.robot.commands.OutTake;
 import frc.robot.commands.ManualShoot;
-import frc.robot.commands.ShootBall;
 import frc.robot.commands.StopAll;
 import frc.robot.commands.TankDrive;
 import frc.robot.commands.*;
@@ -39,7 +38,7 @@ public class RobotContainer {
   private final Intake intake = new Intake();
   private final Shooter shooter = new Shooter();
   private final XboxController controller = new XboxController(Constants.portXbox);
-  private final ShootBall shootBall = new ShootBall(shooter, chassis, NetworkTableInstance.getDefault().getTable("greenVision"));
+  //private final ShootBall shootBall = new ShootBall(shooter, chassis, NetworkTableInstance.getDefault().getTable("greenVision"));
   private final IntakeStuff intakeStuff = new IntakeStuff(shooter, intake);
   private final OutTake outTake = new OutTake(shooter, intake);
   private final ManualShoot manualShoot = new ManualShoot(shooter);
@@ -47,6 +46,8 @@ public class RobotContainer {
   private final AutonCommand autonCommand = new AutonCommand(shooter, chassis);
   private final SolenoidsMoving solenoidsMoving = new SolenoidsMoving(shooter);
   private final StopAll stopAll = new StopAll(shooter, intake, chassis);
+  private final GrappleLift grappleLift = new GrappleLift();
+  private final GrappleCommand grappleCommand = new GrappleCommand(grappleLift);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -57,7 +58,7 @@ public class RobotContainer {
     chassis.setDefaultCommand(
       new TankDrive(chassis, controller)
     );
-    edu.wpi.first.cameraserver.CameraServer.getInstance().startAutomaticCapture();
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
@@ -67,7 +68,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(controller, Button.kA.value).toggleWhenPressed(shootBall);
+    new JoystickButton(controller, Button.kA.value).whenPressed(grappleCommand);
     new JoystickButton(controller, Button.kBumperLeft.value).toggleWhenPressed(intakeStuff);
     new JoystickButton(controller, Button.kY.value).toggleWhenPressed(outTake);
     new JoystickButton(controller, Button.kBumperRight.value).toggleWhenPressed(manualShoot);

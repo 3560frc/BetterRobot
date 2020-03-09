@@ -9,11 +9,14 @@ def extra_processing(pipeline: GripPipeline):
     centre_ys = []
     widths = []
     heights = []
-    for contour in pipeline.find_contours_output:
-        x, y, w, h = cv2.boundingRect(contour)
-        centre_xs.append(x + w / 2)
-        centre_ys.append(y + h / 2)
-        widths.append(w), heights.append(h)
+    try:
+        for contour in pipeline.find_contours_output:
+            x, y, w, h = cv2.boundingRect(contour)
+            if (w < 10 or h < 10): continue
+            centre_xs.append(x + w / 2)
+            centre_ys.append(y + h / 2)
+            widths.append(w), heights.append(h)
+    except: return None
     table = nt.NetworkTables.getTable("greenVision")
     centre_xs.sort(reverse=True)
     centre_ys.sort(reverse=True)
@@ -45,7 +48,6 @@ def main():
     print("Didn't die... Yet")
     while cap.isOpened():
         b, frame = cap.read()
-        vs = VideoStream(src=0).start()
         if b:
             pipeline.process(frame)
             extra_processing(pipeline)

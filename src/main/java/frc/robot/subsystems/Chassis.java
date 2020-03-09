@@ -7,8 +7,12 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
+import com.kauailabs.navx.frc.AHRS;
+
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -16,12 +20,18 @@ public class Chassis extends SubsystemBase {
   
   WPI_TalonSRX rightBack;
   WPI_VictorSPX rightFront, leftFront, leftBack;
+  AHRS ahrs;
 
   public Chassis() {
     rightBack = new WPI_TalonSRX(Constants.portRightBack);
     leftFront = new WPI_VictorSPX(Constants.portLeftFront);
     leftBack = new WPI_VictorSPX(Constants.portLeftBack);
     rightFront = new WPI_VictorSPX(Constants.portRightFront);
+    leftBack.setNeutralMode(NeutralMode.Brake);
+    rightBack.setNeutralMode(NeutralMode.Brake);
+    leftFront.setNeutralMode(NeutralMode.Brake);
+    rightFront.setNeutralMode(NeutralMode.Brake);
+    ahrs = new AHRS(SPI.Port.kMXP); // Connect the NavX to MXP port
   }
 
   public void setLeft(double speed){
